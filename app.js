@@ -269,16 +269,16 @@ function isAccountExist(results) {
     return false;
 }
 
-// app.listen(PORT, () => {
-//     console.log(`Server is running on port ${PORT}`);
-// });
-
-const pfxFilePath = "./certs/server.pfx";
-const passphrase = process.env.PASSPHRASE;
-const options = {
-    pfx: fs.readFileSync(pfxFilePath),
-    passphrase: passphrase,
-};
-https.createServer(options, app).listen(PORT, () => {
-    console.log(`HTTPS server running on ${PORT}`);
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
+
+// const pfxFilePath = "./certs/server.pfx";
+// const passphrase = process.env.PASSPHRASE;
+// const options = {
+//     pfx: fs.readFileSync(pfxFilePath),
+//     passphrase: passphrase,
+// };
+// https.createServer(options, app).listen(PORT, () => {
+//     console.log(`HTTPS server running on ${PORT}`);
+// });
