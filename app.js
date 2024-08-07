@@ -146,7 +146,6 @@ app.patch("/courses", async (req, res) => {
     const endTime = req.body.endTime;
     const maxStudents = req.body.maxStudents;
     const courseName = req.body.courseName;
-    console.log(req.body);
     try {
         await pool.query(
             "UPDATE courses SET start_time = $1, end_time = $2, max_students = $3, course_name = $4 WHERE id = $5;",
