@@ -140,6 +140,25 @@ app.delete("/courses", async (req, res) => {
     }
 });
 
+app.patch("/courses", async (req, res) => {
+    const courseId = req.body.id;
+    const startTime = req.body.startTime;
+    const endTime = req.body.endTime;
+    const maxStudents = req.body.maxStudents;
+    const courseName = req.body.courseName;
+    console.log(req.body);
+    try {
+        await pool.query(
+            "UPDATE courses SET start_time = $1, end_time = $2, max_students = $3, course_name = $4 WHERE id = $5;",
+            [startTime, endTime, maxStudents, courseName, courseId]
+        );
+        return res.json({ message: "Course Edited" });
+    } catch (err) {
+        console.error(err.message);
+        return res.status(500).json({ message: "Error editing course" });
+    }
+});
+
 app.get(
     "/auth/google",
     passport.authenticate("google", { prompt: "select_account" })
