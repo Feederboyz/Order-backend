@@ -162,7 +162,9 @@ app.get("/auth/google/callback", (req, res, next) => {
                     expiresIn: TOKEN_EXPIRY_TIME,
                 }
             );
-            return res.redirect(`${CLIENT_URL}/authcode?authcode=${authCode}`);
+            return res.redirect(
+                `${process.env.CLIENT_URL}/authcode?authcode=${authCode}`
+            );
         });
     })(req, res, next);
 });
