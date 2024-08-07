@@ -162,9 +162,7 @@ app.get("/auth/google/callback", (req, res, next) => {
                     expiresIn: TOKEN_EXPIRY_TIME,
                 }
             );
-            return res.redirect(
-                `http://localhost:3000/authcode?authcode=${authCode}`
-            );
+            return res.redirect(`${CLIENT_URL}/authcode?authcode=${authCode}`);
         });
     })(req, res, next);
 });
@@ -271,16 +269,16 @@ function isAccountExist(results) {
     return false;
 }
 
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
-
-// const pfxFilePath = "./certs/server.pfx";
-// const passphrase = process.env.PASSPHRASE;
-// const options = {
-//     pfx: fs.readFileSync(pfxFilePath),
-//     passphrase: passphrase,
-// };
-// https.createServer(options, app).listen(PORT, () => {
-//     console.log(`HTTPS server running on ${PORT}`);
+// app.listen(PORT, () => {
+//     console.log(`Server is running on port ${PORT}`);
 // });
+
+const pfxFilePath = "./certs/server.pfx";
+const passphrase = process.env.PASSPHRASE;
+const options = {
+    pfx: fs.readFileSync(pfxFilePath),
+    passphrase: passphrase,
+};
+https.createServer(options, app).listen(PORT, () => {
+    console.log(`HTTPS server running on ${PORT}`);
+});
